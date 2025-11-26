@@ -59,14 +59,14 @@ export const MedicalHistoryForm = () => {
                 />
 
                 <FormField
-                    label="If yes, what is the condition being treated?"
+                    label="If so, what is the condition being treated?"
                     fieldKey="treatmentCondition"
                     type="textarea"
                     placeholder="Describe condition..."
                 />
 
                 <RadioField
-                    label="Have you had any serious illness or surgical operation?"
+                    label="Have you ever had serious illness or surgical operation?"
                     fieldKey="seriousIllness"
                     options={[
                         { label: "Yes", value: "yes" },
@@ -76,14 +76,14 @@ export const MedicalHistoryForm = () => {
                 />
 
                 <FormField
-                    label="If yes, what illness or operation?"
+                    label="If so, what illness or operation?"
                     fieldKey="illnessDetails"
                     type="textarea"
                     placeholder="Describe illness or operation..."
                 />
 
                 <RadioField
-                    label="Have you been hospitalized?"
+                    label="Have you ever been hospitalized?"
                     fieldKey="hospitalized"
                     options={[
                         { label: "Yes", value: "yes" },
@@ -93,7 +93,7 @@ export const MedicalHistoryForm = () => {
                 />
 
                 <FormField
-                    label="If yes, when and why?"
+                    label="If so, when and why?"
                     fieldKey="hospitalizationDetails"
                     type="textarea"
                     placeholder="When and why were you hospitalized..."
@@ -110,7 +110,7 @@ export const MedicalHistoryForm = () => {
                 />
 
                 <FormField
-                    label="If yes, please specify medications"
+                    label="If so, please specify"
                     fieldKey="medicationsList"
                     type="textarea"
                     placeholder="List medications..."
@@ -148,6 +148,13 @@ export const MedicalHistoryForm = () => {
                     type="textarea"
                     placeholder="Local Anesthetic, Penicillin, Antibiotics, Aspirin, Latex, Sulfa drugs, Others..."
                 />
+
+                <FormField
+                    label="Bleeding Time?"
+                    fieldKey="bleedingTime"
+                    type="textarea"
+                    placeholder="Enter bleeding time"
+                />
             </div>
 
             <div className="border-t border-gray-200 pt-4 mt-6">
@@ -182,7 +189,6 @@ export const MedicalHistoryForm = () => {
                     options={[
                         { label: "Yes", value: "yes" },
                         { label: "No", value: "no" },
-                        { label: "N/A", value: "na" },
                     ]}
                     layout='vertical'
                 />
@@ -193,17 +199,10 @@ export const MedicalHistoryForm = () => {
                     Medical Conditions
                 </h5>
 
-                <RadioField
+                <FormField
                     label="Blood Type"
                     fieldKey="bloodType"
-                    options={[
-                        { label: "A", value: "A" },
-                        { label: "B", value: "B" },
-                        { label: "AB", value: "AB" },
-                        { label: "O", value: "O" },
-                        { label: "Unknown", value: "unknown" }
-                    ]}
-                    layout='vertical'
+                    placeholder="A+, A–, B+, B–, AB+, AB–, O+, O–"
                 />
 
                 <FormField

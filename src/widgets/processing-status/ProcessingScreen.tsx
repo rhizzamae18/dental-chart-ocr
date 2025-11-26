@@ -21,13 +21,6 @@ export const ProcessingScreen = () => {
     }, 1000);
 
     const timer2 = setTimeout(() => {
-      setExtractedData({
-        patientName: "John Doe",
-        age: "25",
-        gender: "M",
-        lastVisit: "2024-11-19"
-      });
-      
       setAppState('verification');
     }, 3500);
 

@@ -26,17 +26,15 @@ const PAGE_TABS = {
         { id: 'medical-history', label: 'Medical History' },
     ],
     2: [
-        { id: 'consent-treatment', label: 'Treatment Consent' },
+        { id: 'informed-treatment', label: 'Informed Consent' },
         { id: 'consent-procedures', label: 'Procedures' },
         { id: 'signatures', label: 'Signatures' },
     ],
     3: [
-        { id: 'patient-info', label: 'Patient Info' },
-        { id: 'dental-chart', label: 'Dental Chart' },
+        { id: 'dental-chart', label: 'Dental Record Chart' },
         { id: 'clinical-findings', label: 'Clinical Findings' },
     ],
     4: [
-        { id: 'patient-info', label: 'Patient Info' },
         { id: 'treatment-records', label: 'Treatment Records' },
     ],
 };
@@ -95,16 +93,14 @@ export const FormPanel = () => {
                 {activeTab === 'dental-history' && <DentalHistoryForm />}
                 {activeTab === 'medical-history' && <MedicalHistoryForm />}
 
-                {activeTab === 'consent-treatment' && <ConsentTreatmentForm />}
+                {activeTab === 'informed-treatment' && currentPage === 2 && <ConsentTreatmentForm />}
                 {activeTab === 'consent-procedures' && <ConsentProceduresForm />}
                 {activeTab === 'signatures' && <SignaturesForm />}
 
-                {activeTab === 'patient-info' && currentPage === 3 && <PatientInfoForm />}
-                {activeTab === 'dental-chart' && <DentalChartForm />}
+                {activeTab === 'dental-chart' && currentPage === 3 && <DentalChartForm />}
                 {activeTab === 'clinical-findings' && <ClinicalFindingsForm />}
 
-                {activeTab === 'patient-info' && currentPage === 4 && <PatientInfoForm />}
-                {activeTab === 'treatment-records' && <TreatmentRecordsForm />}
+                {activeTab === 'treatment-records' && currentPage === 4 && <TreatmentRecordsForm />}
             </div>
 
             {/* Save Button - Fixed at bottom */}
@@ -120,10 +116,10 @@ export const FormPanel = () => {
                         </>
                     ) : (
                         <>
-                        <div className='flex space-x-2 items-center'>
-                            <Save className="h-5 w-5"/>
-                            <h1>Save & Next Page →</h1>
-                        </div>
+                            <div className='flex space-x-2 items-center'>
+                                <Save className="h-5 w-5" />
+                                <h1>Save & Next Page →</h1>
+                            </div>
                         </>
                     )}
                 </button>

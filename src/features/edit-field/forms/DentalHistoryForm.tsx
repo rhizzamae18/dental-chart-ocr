@@ -7,29 +7,16 @@ export const DentalHistoryForm = () => {
         Dental History
       </h4>
 
-      <FormField 
-        label="Previous Dentist" 
-        fieldKey="previousDentist" 
+      <FormField
+        label="Previous Dentist"
+        fieldKey="previousDentist"
         placeholder="Dr. Name"
       />
 
-      <FormField 
-        label="Last Dental Visit" 
-        fieldKey="lastDentalVisit" 
+      <FormField
+        label="Last Dental Visit"
+        fieldKey="lastDentalVisit"
         type="date"
-      />
-
-      <FormField 
-        label="Whom may we thank for referring you?" 
-        fieldKey="referredBy" 
-        placeholder="Referral source"
-      />
-
-      <FormField 
-        label="What is your reason for dental consultation?" 
-        fieldKey="consultationReason" 
-        type="textarea"
-        placeholder="Describe your dental concerns..."
       />
     </div>
   );
