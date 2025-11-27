@@ -66,7 +66,7 @@ export const FormPanel = () => {
         <div className="flex flex-col h-full">
             {/* Tab Navigation - Scrollable on mobile */}
             <div className="px-4 sm:px-6 pt-3 sm:pt-4 flex-shrink-0">
-                <div className="flex gap-1 border-b border overflow-x-auto scrollbar-hide">
+                <div className="flex gap-1 border-b border-default overflow-x-auto scrollbar-hide">
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
@@ -104,7 +104,7 @@ export const FormPanel = () => {
             </div>
 
             {/* Save Button - Fixed at bottom */}
-            <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border flex-shrink-0">
+            <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-default flex-shrink-0">
                 <button
                     onClick={handleSaveAndNext}
                     className="w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-primary text-white text-sm sm:text-base font-medium rounded-lg hover:bg-primary-hover transition-colors flex items-center justify-center gap-2"

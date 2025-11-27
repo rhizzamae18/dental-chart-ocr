@@ -31,7 +31,7 @@ export default {
 					darker: 'rgb(var(--color-bg-darker) / <alpha-value>)',
 				},
 				border: {
-					DEFAULT: 'rgb(var(--color-border) / <alpha-value>)',
+					DEFAULT: 'rgb(var(--color-border-default) / <alpha-value>)',
 					dark: 'rgb(var(--color-border-dark) / <alpha-value>)',
 				},
 				success: 'rgb(var(--color-success) / <alpha-value>)',
