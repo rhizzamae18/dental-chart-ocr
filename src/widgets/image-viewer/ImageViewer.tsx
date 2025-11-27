@@ -8,6 +8,12 @@ export const ImageViewer = () => {
   // STATE: Track zoom level (starts at 1 = 100%)
   const [zoom, setZoom] = useState(1);
 
+  // NEW: Track if we're editing the zoom percentage
+  const [isEditing, setIsEditing] = useState(false);
+
+  // NEW: Track what user is typing in the input field
+  const [inputValue, setInputValue] = useState('');
+
   // REF: Reference to the container for fullscreen;
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -32,6 +38,47 @@ export const ImageViewer = () => {
     }
   }
 
+  // HANDLER: When user clicks the percentage, enter edit mode
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setInputValue(Math.round(zoom * 100).toString()); // Pre-fill with current value
+  };
+
+  // HANDLER: Apply the typed zoom value
+  const applyZoomValue = () => {
+    const numValue = parseInt(inputValue);
+
+    // Validate: is it a valid nuber?
+    if (isNaN(numValue)) {
+      setIsEditing(false);
+      return;
+    }
+
+    // Convert percentage to zoom (100 -> 1, 200 -> 2)
+    const newZoom = numValue / 100;
+
+    // Apply limits (50% min, 300% max)
+    const clampedZoom = Math.max(0.5, Math.min(3, newZoom));
+
+    setZoom(clampedZoom);
+    setIsEditing(false); // Exit edit mode
+  };
+
+  // HANDLER: Cancel editing (Escape key)
+  const cancelEdit = () => {
+    setIsEditing(false);
+    setInputValue(''); // Clear input
+  };
+
+  // HANDLER: Handle keyboard input in the zoom field
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      applyZoomValue(); // Apply on enter
+    } else if (e.key === 'Escape') {
+      cancelEdit(); // Cancel on Escape
+    }
+
+  }
   const imageUrl = uploadedImage ? URL.createObjectURL(uploadedImage) : null;
 
   if (!imageUrl) {
@@ -52,7 +99,24 @@ export const ImageViewer = () => {
         >
           <ZoomOut className="w-5 h-5 text-white" />
         </button>
-        <span className="text-white text-sm font-medium px-3">{Math.round(zoom * 100)}%</span>
+        {isEditing ? (
+          <input type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onBlur={applyZoomValue}
+            onKeyDown={handleKeyDown}
+            autoFocus
+            className="w-14 text-center text-gray-200 bg-gray-800 rounded-lg transition-colors focus:outline-none focus:ring-0 py-1.5"
+          />
+        )
+          : (
+            <span
+              onClick={handleEditClick}
+              className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors text-white text-sm cursor-pointer"
+            >
+              {Math.round(zoom * 100)}%
+            </span>
+          )}
         <button
           className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
           onClick={handleZoomIn}
