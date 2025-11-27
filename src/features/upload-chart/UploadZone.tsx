@@ -3,14 +3,10 @@ import { useAppStore } from '@/shared/store/useAppStore';
 import { Upload } from 'lucide-react';
 
 export const UploadZone = () => {
-  // 1️⃣ Get actions from our store
   const setUploadedImage = useAppStore((state) => state.setUploadedImage);
   const setAppState = useAppStore((state) => state.setAppState);
 
-  // 2️⃣ Local state for visual feedback (is the user hovering?)
   const [isDragging, setIsDragging] = useState(false);
-
-  // 3️⃣ Helper function to process the file
   const handleFile = (file: File) => {
     if (!file) return;
 
@@ -21,17 +17,13 @@ export const UploadZone = () => {
     }
 
     console.log("File received:", file.name); // Debugging
-
-    // ✅ Update the GLOBAL store
     setUploadedImage(file);
 
-    // ✅ Move to next state automatically
     setAppState('loading');
 
     // (In the future, this is where we trigger the AI API call)
   };
 
-  // 4️⃣ Event Handlers
   const onDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault(); // IMPORTANT: Prevents browser from opening the file
     setIsDragging(true);
