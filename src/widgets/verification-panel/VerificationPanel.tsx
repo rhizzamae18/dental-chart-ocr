@@ -6,7 +6,6 @@ export const VerificationPanel = () => {
   const currentPage = useAppStore((state) => state.currentPage);
 
   return (
-    // Changed: flex-col on mobile, flex-row on desktop
     <div className="h-full flex flex-col lg:flex-row">
       {/* LEFT: Image Panel */}
       <div className="w-full lg:w-1/2 bg-gray-900 p-2 sm:p-4 flex flex-col h-1/3 lg:h-full">

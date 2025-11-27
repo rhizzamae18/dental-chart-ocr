@@ -8,13 +8,13 @@ export const MainPage = () => {
     const appState = useAppStore((state) => state.appState);
 
     return (
-        <div className="h-screen flex flex-col overflow-hidden"> {/* ← Changed here */}
+        <div className="h-screen flex flex-col overflow-hidden">
             {/* Header */}
             <Header />
 
             {/* Main content */}
             {(appState === 'empty' || appState === 'loading') && (
-                <main className="flex-1 overflow-auto px-4 py-8"> {/* ← Added overflow-auto */}
+                <main className="flex-1 overflow-auto px-4 py-8">
                     <div className="max-w-7xl mx-auto">
                         {appState === 'empty' && (
                             <div className="space-y-8">
@@ -40,7 +40,7 @@ export const MainPage = () => {
 
             {/* Verification - Full viewport */}
             {appState === 'verification' && (
-                <main className="flex-1 overflow-hidden"> {/* ← Keep overflow-hidden */}
+                <main className="flex-1 overflow-hidden">
                     <VerificationPanel />
                 </main>
             )}
