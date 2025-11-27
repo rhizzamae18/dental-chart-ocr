@@ -1,59 +1,43 @@
 export default {
-    darkMode: ["class"],
-    content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}",
-    ],
-    plugins: [require("tailwindcss-animate")],
-    theme: {
-    	extend: {
-    		borderRadius: {
-    			lg: 'var(--radius)',
-    			md: 'calc(var(--radius) - 2px)',
-    			sm: 'calc(var(--radius) - 4px)'
-    		},
-    		colors: {
-    			background: 'hsl(var(--background))',
-    			foreground: 'hsl(var(--foreground))',
-    			card: {
-    				DEFAULT: 'hsl(var(--card))',
-    				foreground: 'hsl(var(--card-foreground))'
-    			},
-    			popover: {
-    				DEFAULT: 'hsl(var(--popover))',
-    				foreground: 'hsl(var(--popover-foreground))'
-    			},
-    			primary: {
-    				DEFAULT: 'hsl(var(--primary))',
-    				foreground: 'hsl(var(--primary-foreground))'
-    			},
-    			secondary: {
-    				DEFAULT: 'hsl(var(--secondary))',
-    				foreground: 'hsl(var(--secondary-foreground))'
-    			},
-    			muted: {
-    				DEFAULT: 'hsl(var(--muted))',
-    				foreground: 'hsl(var(--muted-foreground))'
-    			},
-    			accent: {
-    				DEFAULT: 'hsl(var(--accent))',
-    				foreground: 'hsl(var(--accent-foreground))'
-    			},
-    			destructive: {
-    				DEFAULT: 'hsl(var(--destructive))',
-    				foreground: 'hsl(var(--destructive-foreground))'
-    			},
-    			border: 'hsl(var(--border))',
-    			input: 'hsl(var(--input))',
-    			ring: 'hsl(var(--ring))',
-    			chart: {
-    				'1': 'hsl(var(--chart-1))',
-    				'2': 'hsl(var(--chart-2))',
-    				'3': 'hsl(var(--chart-3))',
-    				'4': 'hsl(var(--chart-4))',
-    				'5': 'hsl(var(--chart-5))'
-    			}
-    		}
-    	}
-    }
+	darkMode: ["class"],
+	content: [
+		"./index.html",
+		"./src/**/*.{js,ts,jsx,tsx}",
+	],
+	plugins: [require("tailwindcss-animate")],
+	theme: {
+		extend: {
+			colors: {
+				// Custom Design System Colors
+				primary: {
+					DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
+					hover: 'rgb(var(--color-primary-hover) / <alpha-value>)',
+					light: 'rgb(var(--color-primary-light) / <alpha-value>)',
+					border: 'rgb(var(--color-primary-border) / <alpha-value>)',
+				},
+				accent: {
+					DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
+					light: 'rgb(var(--color-accent-light) / <alpha-value>)',
+				},
+				text: {
+					primary: 'rgb(var(--color-text-primary) / <alpha-value>)',
+					secondary: 'rgb(var(--color-text-secondary) / <alpha-value>)',
+					muted: 'rgb(var(--color-text-muted) / <alpha-value>)',
+				},
+				bg: {
+					primary: 'rgb(var(--color-bg-primary) / <alpha-value>)',
+					secondary: 'rgb(var(--color-bg-secondary) / <alpha-value>)',
+					dark: 'rgb(var(--color-bg-dark) / <alpha-value>)',
+					darker: 'rgb(var(--color-bg-darker) / <alpha-value>)',
+				},
+				border: {
+					DEFAULT: 'rgb(var(--color-border) / <alpha-value>)',
+					dark: 'rgb(var(--color-border-dark) / <alpha-value>)',
+				},
+				success: 'rgb(var(--color-success) / <alpha-value>)',
+				warning: 'rgb(var(--color-warning) / <alpha-value>)',
+				error: 'rgb(var(--color-error) / <alpha-value>)',
+			}
+		}
+	}
 }

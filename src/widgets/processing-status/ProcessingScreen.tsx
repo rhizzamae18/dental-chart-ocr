@@ -5,7 +5,7 @@ import { CircleCheckBig, Loader2 } from 'lucide-react';
 export const ProcessingScreen = () => {
   const setAppState = useAppStore((state) => state.setAppState);
   const setExtractedData = useAppStore((state) => state.setExtractedData);
-  
+
   const [currentStep, setCurrentStep] = useState(1);
   const [statusText, setStatusText] = useState('Uploading image...');
 
@@ -33,7 +33,7 @@ export const ProcessingScreen = () => {
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-200px)] px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-gray-100 p-8 sm:p-12">
-        
+
         {/* Animated Icon */}
         <div className="flex justify-center mb-8">
           <div className="relative">
@@ -61,23 +61,23 @@ export const ProcessingScreen = () => {
                 />
               </svg>
             </div>
-            
+
             {/* Center sparkle icon */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-50 rounded-full flex items-center justify-center">
-               <h1>🦷</h1>
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-light rounded-full flex items-center justify-center">
+                <h1>🦷</h1>
               </div>
             </div>
           </div>
         </div>
 
         {/* Title */}
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-3 tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-bold text-text-primary text-center mb-3 tracking-tight">
           AI Processing...
         </h2>
 
         {/* Subtitle */}
-        <p className="text-sm sm:text-base text-gray-500 text-center mb-10 font-medium">
+        <p className="text-sm sm:text-base text-text-secondary text-center mb-10 font-medium">
           {statusText}
         </p>
 
@@ -95,7 +95,7 @@ export const ProcessingScreen = () => {
                     <CircleCheckBig className="w-3 h-3 text-green-500" />
                   </div>
                 ) : currentStep === step.id ? (
-                  <Loader2 className="w-5 h-5 text-indigo-600 animate-spin" />
+                  <Loader2 className="w-5 h-5 text-primary animate-spin" />
                 ) : (
                   <div className="w-5 h-5 rounded-full border-2 border-gray-300"></div>
                 )}
@@ -103,11 +103,10 @@ export const ProcessingScreen = () => {
 
               {/* Step Label */}
               <span
-                className={`text-sm sm:text-base font-mono font-thin ${
-                  currentStep >= step.id
+                className={`text-sm sm:text-base font-mono font-thin ${currentStep >= step.id
                     ? 'text-gray-400'
                     : 'text-gray-400'
-                }`}
+                  }`}
               >
                 {step.label}
               </span>

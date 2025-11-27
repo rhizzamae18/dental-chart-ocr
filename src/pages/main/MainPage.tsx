@@ -21,7 +21,7 @@ export const MainPage = () => {
                                 <div className="text-center">
                                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-5 px-4">
                                         Digitize Records{' '}
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
                                             in Seconds
                                         </span>
                                     </h2>

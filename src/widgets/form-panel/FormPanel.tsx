@@ -66,7 +66,7 @@ export const FormPanel = () => {
         <div className="flex flex-col h-full">
             {/* Tab Navigation - Scrollable on mobile */}
             <div className="px-4 sm:px-6 pt-3 sm:pt-4 flex-shrink-0">
-                <div className="flex gap-1 border-b border-gray-200 overflow-x-auto scrollbar-hide">
+                <div className="flex gap-1 border-b border overflow-x-auto scrollbar-hide">
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
@@ -75,8 +75,8 @@ export const FormPanel = () => {
                 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap
                 border-b-4 -mb-[1px]
                 ${activeTab === tab.id
-                                    ? 'border-indigo-600 text-indigo-600'
-                                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                                    ? 'border-primary text-primary'
+                                    : 'border-transparent text-text-secondary hover:text-text-primary'
                                 }
               `}
                         >
@@ -104,10 +104,10 @@ export const FormPanel = () => {
             </div>
 
             {/* Save Button - Fixed at bottom */}
-            <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-200 flex-shrink-0">
+            <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border flex-shrink-0">
                 <button
                     onClick={handleSaveAndNext}
-                    className="w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-indigo-600 text-white text-sm sm:text-base font-medium rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
+                    className="w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-primary text-white text-sm sm:text-base font-medium rounded-lg hover:bg-primary-hover transition-colors flex items-center justify-center gap-2"
                 >
                     {currentPage >= 4 ? (
                         <>

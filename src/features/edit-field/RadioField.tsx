@@ -12,13 +12,13 @@ interface RadioFieldProps {
   layout?: 'horizontal' | 'vertical' | 'responsive';  // How to display options
 }
 
-export const RadioField = ({ 
-  label, 
-  fieldKey, 
+export const RadioField = ({
+  label,
+  fieldKey,
   options,
   layout = 'responsive'
 }: RadioFieldProps) => {
-  
+
   // Read from store
   const extractedData = useAppStore((state) => state.extractedData);
   const formData = useAppStore((state) => state.formData);
@@ -34,10 +34,10 @@ export const RadioField = ({
 
   const getLayoutClasses = () => {
     if (layout === 'horizontal') {
-        return 'flex-row gap-4';
+      return 'flex-row gap-4';
     }
     if (layout === 'vertical') {
-        return 'flex-col gap-2';
+      return 'flex-col gap-2';
     }
     // Responsive: vertical on mobile, horizontal on tablet+
     return 'flex-col gap-2 sm:flex-row sm:gap-4'
@@ -46,7 +46,7 @@ export const RadioField = ({
   return (
     <div className="mb-4">
       {/* Label */}
-      <label className="block text-sm font-medium text-gray-700 mb-2">
+      <label className="block text-sm font-medium text-text-secondary mb-2">
         {label}
       </label>
 
@@ -64,11 +64,11 @@ export const RadioField = ({
               value={option.value}
               checked={value === option.value}  // Is this selected?
               onChange={() => handleChange(option.value)}
-              className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500 cursor-pointer accent-indigo-600"
+              className="w-4 h-4 text-primary border-gray-300 focus:ring-primary cursor-pointer accent-primary"
             />
-            
+
             {/* The label text */}
-            <span className="text-sm text-gray-700 group-hover:text-gray-900">
+            <span className="text-sm text-text-secondary group-hover:text-text-primary">
               {option.label}
             </span>
           </label>

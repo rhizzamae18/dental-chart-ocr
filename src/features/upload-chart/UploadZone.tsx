@@ -57,11 +57,11 @@ export const UploadZone = () => {
         onDragLeave={onDragLeave}
         onDrop={onDrop}
         className={`
-            relative border-2 border-indigo-400 border-dashed rounded-xl py-20 sm:py-32 lg:py-40 transition-all duration-200 ease-in-out
+            relative border-2 border-primary-border border-dashed rounded-xl py-20 sm:py-32 lg:py-40 transition-all duration-200 ease-in-out
             flex flex-col items-center justify-center cursor-pointer
             ${isDragging
-            ? 'border-blue-500 bg-blue-50 scale-[1.02]'
-            : 'border-gray-300 hover:border-indigo-600 hover:bg-gray-50'
+            ? 'border-accent bg-accent-light scale-[1.02]'
+            : 'border-gray-300 hover:border-primary hover:bg-bg-secondary'
           }
           `}
       >
@@ -72,7 +72,7 @@ export const UploadZone = () => {
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         />
 
-        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mb-4">
+        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-light text-primary rounded-full flex items-center justify-center mb-4">
           <Upload className="w-6 h-6 sm:w-8 sm:h-8" />
         </div>
 

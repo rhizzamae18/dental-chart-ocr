@@ -7,13 +7,13 @@ interface FormFieldProps {
   placeholder?: string;
 }
 
-export const FormField = ({ 
-  label, 
-  fieldKey, 
+export const FormField = ({
+  label,
+  fieldKey,
   type = 'text',
-  placeholder 
+  placeholder
 }: FormFieldProps) => {
-  
+
   // Read from store
   const extractedData = useAppStore((state) => state.extractedData);
   const formData = useAppStore((state) => state.formData);
@@ -30,7 +30,7 @@ export const FormField = ({
   return (
     <div className="mb-4">
       {/* Label */}
-      <label className="block text-sm font-medium text-gray-700 mb-1">
+      <label className="block text-sm font-medium text-text-secondary mb-1">
         {label}
       </label>
 
@@ -41,7 +41,7 @@ export const FormField = ({
           onChange={handleChange}
           placeholder={placeholder}
           rows={4}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition"
         />
       ) : (
         <input
@@ -49,7 +49,7 @@ export const FormField = ({
           value={value}
           onChange={handleChange}
           placeholder={placeholder}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition"
         />
       )}
     </div>
