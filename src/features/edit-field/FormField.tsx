@@ -49,7 +49,7 @@ export const FormField = ({
           value={value}
           onChange={handleChange}
           placeholder={placeholder}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition"
+          className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition ${type === 'number' ? 'no-spinner' : ' '}`}
         />
       )}
     </div>
