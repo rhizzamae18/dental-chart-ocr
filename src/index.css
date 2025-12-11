@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+}
 
 /* Hide scrollbar but keep functionality */
 @layer utilities {
@@ -26,45 +34,45 @@
 }
 
 :root {
-  /* Primary Brand Colors (Indigo) */
-  --color-primary: 79 70 229;
-  /* indigo-600*/
-  --color-primary-hover: 67 56 202;
-  /* indigo-700*/
-  --color-primary-light: 238 242 255;
-  /* indigo-50*/
-  --color-primary-border: 129 140 248;
-  /* indigo-400*/
+  /* Primary Brand Colors - Dental Chart Blue (#3F638D) */
+  --color-primary: 63 99 141;
+  /* #3F638D */
+  --color-primary-hover: 51 79 113;
+  /* Darker shade of #3F638D */
+  --color-primary-light: 235 240 245;
+  /* Light blue-gray */
+  --color-primary-border: 86 124 137;
+  /* #567C89 */
 
-  /* Accent Colors (Blue) */
-  --color-accent: 37 99 235;
-  /*blue-600*/
-  --color-accent-light: 239 246 255;
-  /* blue-50*/
+  /* Accent Colors - Secondary Blue-Gray (#567C89) */
+  --color-accent: 86 124 137;
+  /* #567C89 */
+  --color-accent-light: 240 244 247;
+  /* Light blue-gray */
 
   /* Text Colors*/
-  --color-text-primary: 17 24 39;
-  /* gray-900*/
-  --color-text-secondary: 75 85 99;
-  /* gray-600*/
+  --color-text-primary: 63 99 141;
+  /* #3F638D for headings */
+  --color-text-secondary: 86 124 137;
+  /* #567C89 for body text */
   --color-text-muted: 156 163 175;
   /* gray-400*/
 
   /* Background Colors */
   --color-bg-primary: 255 255 255;
   /* white*/
-  --color-bg-secondary: 249 250 251;
-  /* gray-50*/
-  --color-bg-dark: 31 41 55;
-  /* gray-800*/
-  --color-bg-darker: 17 24 39;
-  /* gray-900*/
+  --color-bg-secondary: 245 247 250;
+  /* light gray background */
+  --color-bg-dark: 63 99 141;
+  /* #3F638D */
+  --color-bg-darker: 51 79 113;
+  /* Darker #3F638D */
 
   /* Border Colors */
-  --color-border-default: 229 231 235;
-  /* gray-200*/
-  --color-border-dark: 75 85 99;
-  /* gray-600*/
+  --color-border-default: 86 124 137;
+  /* #567C89 */
+  --color-border-dark: 63 99 141;
+  /* #3F638D */
 
   /* Status Colors (for future use) */
   --color-success: 34 197 94;

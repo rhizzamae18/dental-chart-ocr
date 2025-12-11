@@ -1,5 +1,6 @@
 import { useAppStore } from '@/shared/store/useAppStore';
 import { ImageViewer } from '@/widgets/image-viewer/ImageViewer';
+import { PdfViewer } from '@/widgets/pdf-viewer/PdfViewer';
 import { FormPanel } from '@/widgets/form-panel/FormPanel';
 
 export const VerificationPanel = () => {
@@ -9,7 +10,12 @@ export const VerificationPanel = () => {
     <div className="h-full flex flex-col lg:flex-row">
       {/* LEFT: Image Panel */}
       <div className="w-full lg:w-1/2 bg-gray-900 p-2 sm:p-4 flex flex-col h-1/3 lg:h-full">
-        <ImageViewer />
+        {/* If we have separated PDF pages, use the PDF viewer */}
+        {useAppStore((state) => state.separatedPages.length > 0) ? (
+          <PdfViewer />
+        ) : (
+          <ImageViewer />
+        )}
       </div>
 
       {/* RIGHT: Form Panel */}

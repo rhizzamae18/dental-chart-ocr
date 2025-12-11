@@ -20,7 +20,9 @@ export const FormField = ({
   const updateFormData = useAppStore((state) => state.updateFormData);
 
   // Get the value: use edited value if exists, otherwise use extracted value
-  const value = formData[fieldKey] ?? extractedData?.[fieldKey] ?? '';
+  // Convert to string to ensure compatibility with HTML input elements
+  const rawValue = formData[fieldKey] ?? extractedData?.[fieldKey] ?? '';
+  const value = String(rawValue);
 
   // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

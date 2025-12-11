@@ -13,10 +13,16 @@ interface AppState {
     uploadedImage: File | null;
 
     // Data extracted by AI (we'll define this better later)
-    extractedData: Record<string, any> | null;
+    extractedData: Record<string, unknown> | null;
 
     // User's edited form data
-    formData: Record<string, any>;
+    formData: Record<string, string | number | boolean>;
+
+    // For PDF uploads: holds the 4 generated image URLs
+    separatedPages: string[];
+
+    // Track which upload mode user selected
+    uploadMode: 'pdf' | 'images' | null;
 }
 
 // Functions to change the state
@@ -31,13 +37,19 @@ interface AppActions {
     setUploadedImage: (file: File) => void;
 
     // Set the AI extracted data
-    setExtractedData: (data: Record<string, any>) => void;
+    setExtractedData: (data: Record<string, unknown>) => void;
 
     // Update form data when user edits
-    updateFormData: (field: string, value: any) => void;
+    updateFormData: (field: string, value: string | number | boolean) => void;
 
     // Reset everything (for next upload)
     resetPage: () => void;
+
+    // NEW: For PDF, store the 4 extracted page images (URLs)
+    setSeparatedPages: (pages: string[]) => void;
+
+    // Set upload mode
+    setUploadMode: (mode: 'pdf' | 'images' | null) => void;
 }
 
 // Create the store
@@ -48,6 +60,8 @@ export const useAppStore = create<AppState & AppActions>((set) => ({
     uploadedImage: null,
     extractedData: null,
     formData: {},
+    separatedPages: [],
+    uploadMode: null,
 
     // ACTIONS (functions to update state)
     setAppState: (state) =>
@@ -72,11 +86,20 @@ export const useAppStore = create<AppState & AppActions>((set) => ({
             }
         })),
 
+    setSeparatedPages: (pages) =>
+        set({ separatedPages: pages }),
+
+    setUploadMode: (mode) =>
+        set({ uploadMode: mode }),
+
     resetPage: () =>
         set({
             appState: 'empty',
+            currentPage: 1,
             uploadedImage: null,
             extractedData: null,
-            formData: {}
+            formData: {},
+            separatedPages: [],
+            uploadMode: null
         })
 }))

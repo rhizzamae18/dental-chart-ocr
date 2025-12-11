@@ -1,5 +1,5 @@
 import { Save } from 'lucide-react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppStore } from '@/shared/store/useAppStore';
 
 // Page 1 Forms
@@ -18,6 +18,7 @@ import { ClinicalFindingsForm } from '@/features/edit-field/forms/ClinicalFindin
 
 // Page 4 Forms
 import { TreatmentRecordsForm } from '@/features/edit-field/forms/TreatmentRecordsForm';
+import { UploadNextPageModal } from '@/widgets/upload-next-page-modal/UploadNextPageModal';
 
 const PAGE_TABS = {
     1: [
@@ -45,21 +46,54 @@ export const FormPanel = () => {
     const currentPage = useAppStore((state) => state.currentPage);
     const formData = useAppStore((state) => state.formData);
     const nextPage = useAppStore((state) => state.nextPage);
-    const resetPage = useAppStore((state) => state.resetPage);
+    const uploadMode = useAppStore((state) => state.uploadMode);
+    const separatedPages = useAppStore((state) => state.separatedPages);
+    const setSeparatedPages = useAppStore((state) => state.setSeparatedPages);
+
 
     const tabs = PAGE_TABS[currentPage as keyof typeof PAGE_TABS] || [];
     const [activeTab, setActiveTab] = useState(tabs[0]?.id || '');
+    const [showUploadModal, setShowUploadModal] = useState(false);
+
+    // Reset to first tab when page changes
+    useEffect(() => {
+        setActiveTab(tabs[0]?.id || '');
+    }, [currentPage]);
 
     const handleSaveAndNext = () => {
         console.log('Saving Page', currentPage, 'data:', formData);
 
         if (currentPage >= 4) {
             alert('All 4 pages completed! 🎉\nData saved:\n' + JSON.stringify(formData, null, 2));
+            window.location.reload();
             return;
         }
 
-        nextPage();
-        resetPage();
+        // For image mode, show modal to upload next page
+        if (uploadMode === 'images') {
+            setShowUploadModal(true);
+        } else {
+            // PDF mode: just go to next page
+            nextPage();
+        }
+    };
+
+    const handleModalUpload = (file: File) => {
+        // Convert file to data URL and add to separatedPages
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const imageUrl = e.target?.result as string;
+            const updatedPages = [...separatedPages];
+            updatedPages[currentPage] = imageUrl; // currentPage is 1-indexed, so this sets page 2, 3, or 4
+            setSeparatedPages(updatedPages);
+            setShowUploadModal(false);
+            nextPage();
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleModalCancel = () => {
+        setShowUploadModal(false);
     };
 
     return (
@@ -124,6 +158,14 @@ export const FormPanel = () => {
                     )}
                 </button>
             </div>
+
+            {/* Upload Modal */}
+            <UploadNextPageModal
+                isOpen={showUploadModal}
+                currentPage={currentPage + 1}
+                onUpload={handleModalUpload}
+                onCancel={handleModalCancel}
+            />
         </div>
     );
 };

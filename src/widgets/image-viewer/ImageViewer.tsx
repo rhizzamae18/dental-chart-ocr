@@ -79,7 +79,23 @@ export const ImageViewer = () => {
     }
 
   }
-  const imageUrl = uploadedImage ? URL.createObjectURL(uploadedImage) : null;
+  const currentPage = useAppStore((state) => state.currentPage);
+  const separatedPages = useAppStore((state) => state.separatedPages);
+
+  // ... (keeping existing state hooks) ...
+
+  // Determine which image to show
+  // If we have separated pages (PDF mode), show the current page
+  // Otherwise show the single uploaded image
+  let imageUrl: string | null = null;
+
+  if (separatedPages && separatedPages.length > 0) {
+    // PDF Mode: get page at index (currentPage - 1)
+    imageUrl = separatedPages[currentPage - 1] || null;
+  } else if (uploadedImage) {
+    // Image Mode: create object URL
+    imageUrl = URL.createObjectURL(uploadedImage);
+  }
 
   if (!imageUrl) {
     return (
@@ -132,12 +148,15 @@ export const ImageViewer = () => {
       </div>
 
       {/* Image Container - Takes remaining space */}
-      <div className="flex-1 overflow-auto bg-black rounded-lg flex items-center justify-center">
+      <div className="flex-1 overflow-auto bg-black rounded-lg">
         <img
           src={imageUrl}
           alt="Uploaded dental chart"
-          className="max-w-full max-h-full object-contain"
-          style={{ transform: `scale(${zoom})` }}
+          className="w-full h-auto"
+          style={{
+            transform: `scale(${zoom})`,
+            transformOrigin: 'top center'
+          }}
         />
       </div>
     </div>
