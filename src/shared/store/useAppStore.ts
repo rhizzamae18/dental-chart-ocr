@@ -33,6 +33,9 @@ interface AppActions {
     // Move to next page (1 -> 2 -> 3 -> 4)
     nextPage: () => void;
 
+    // Move to previous page (4 -> 3 -> 2 -> 1)
+    previousPage: () => void;
+
     // Set the upload image
     setUploadedImage: (file: File) => void;
 
@@ -70,6 +73,11 @@ export const useAppStore = create<AppState & AppActions>((set) => ({
     nextPage: () =>
         set((prev) => ({
             currentPage: prev.currentPage + 1
+        })),
+
+    previousPage: () =>
+        set((prev) => ({
+            currentPage: Math.max(1, prev.currentPage - 1)
         })),
 
     setUploadedImage: (file) =>

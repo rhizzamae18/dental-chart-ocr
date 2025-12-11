@@ -5,13 +5,15 @@ interface FormFieldProps {
   fieldKey: string;     // "patientName" (key in the data)
   type?: 'text' | 'number' | 'date' | 'textarea';
   placeholder?: string;
+  required?: boolean;   // Whether the field is required
 }
 
 export const FormField = ({
   label,
   fieldKey,
   type = 'text',
-  placeholder
+  placeholder,
+  required = false
 }: FormFieldProps) => {
 
   // Read from store
@@ -34,6 +36,7 @@ export const FormField = ({
       {/* Label */}
       <label className="block text-sm font-medium text-text-secondary mb-1">
         {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
       </label>
 
       {/* Input or Textarea */}
@@ -43,6 +46,7 @@ export const FormField = ({
           onChange={handleChange}
           placeholder={placeholder}
           rows={4}
+          required={required}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition"
         />
       ) : (
@@ -51,6 +55,7 @@ export const FormField = ({
           value={value}
           onChange={handleChange}
           placeholder={placeholder}
+          required={required}
           className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary outline-none transition ${type === 'number' ? 'no-spinner' : ' '}`}
         />
       )}

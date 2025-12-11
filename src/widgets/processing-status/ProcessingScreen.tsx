@@ -5,12 +5,18 @@ import { CircleCheckBig, Loader2 } from 'lucide-react';
 export const ProcessingScreen = () => {
   const setAppState = useAppStore((state) => state.setAppState);
   const setExtractedData = useAppStore((state) => state.setExtractedData);
+  const uploadMode = useAppStore((state) => state.uploadMode);
 
   const [currentStep, setCurrentStep] = useState(1);
-  const [statusText, setStatusText] = useState('Uploading image...');
+  const [statusText, setStatusText] = useState(
+    uploadMode === 'pdf' ? 'Uploading PDF...' : 'Uploading image...'
+  );
 
   const steps = [
-    { id: 1, label: 'Image uploaded' },
+    {
+      id: 1,
+      label: uploadMode === 'pdf' ? 'PDF uploaded' : 'Image uploaded'
+    },
     { id: 2, label: 'Gemini Vision API' },
   ];
 
@@ -45,7 +51,7 @@ export const ProcessingScreen = () => {
                   cy="50"
                   r="45"
                   fill="none"
-                  stroke="#E0E7FF"
+                  stroke="#adc9e6ff"
                   strokeWidth="8"
                 />
                 <circle
@@ -53,7 +59,7 @@ export const ProcessingScreen = () => {
                   cy="50"
                   r="45"
                   fill="none"
-                  stroke="#6366F1"
+                  stroke="#4d76b0ff"
                   strokeWidth="8"
                   strokeDasharray="70 200"
                   strokeLinecap="round"
@@ -103,9 +109,9 @@ export const ProcessingScreen = () => {
 
               {/* Step Label */}
               <span
-                className={`text-sm sm:text-base font-mono font-thin ${currentStep >= step.id
-                    ? 'text-gray-400'
-                    : 'text-gray-400'
+                className={`text-sm sm:text-base font-semibold ${currentStep >= step.id
+                  ? 'text-gray-400'
+                  : 'text-gray-400'
                   }`}
               >
                 {step.label}

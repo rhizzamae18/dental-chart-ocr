@@ -13,6 +13,8 @@ export const PatientInfoForm = () => {
           label="Last Name"
           fieldKey="lastName"
           placeholder="Enter last name"
+        // required
+
         />
         <FormField
           label="First Name"

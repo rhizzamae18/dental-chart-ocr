@@ -1,4 +1,4 @@
-import { Save } from 'lucide-react'
+import { Save, ChevronLeft } from 'lucide-react'
 import { useState, useEffect } from 'react';
 import { useAppStore } from '@/shared/store/useAppStore';
 
@@ -46,6 +46,7 @@ export const FormPanel = () => {
     const currentPage = useAppStore((state) => state.currentPage);
     const formData = useAppStore((state) => state.formData);
     const nextPage = useAppStore((state) => state.nextPage);
+    const previousPage = useAppStore((state) => state.previousPage);
     const uploadMode = useAppStore((state) => state.uploadMode);
     const separatedPages = useAppStore((state) => state.separatedPages);
     const setSeparatedPages = useAppStore((state) => state.setSeparatedPages);
@@ -60,7 +61,9 @@ export const FormPanel = () => {
         setActiveTab(tabs[0]?.id || '');
     }, [currentPage]);
 
-    const handleSaveAndNext = () => {
+    const handleSaveAndNext = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); // Prevent default form submission
+
         console.log('Saving Page', currentPage, 'data:', formData);
 
         if (currentPage >= 4) {
@@ -92,17 +95,19 @@ export const FormPanel = () => {
         reader.readAsDataURL(file);
     };
 
+
     const handleModalCancel = () => {
         setShowUploadModal(false);
     };
 
     return (
-        <div className="flex flex-col h-full">
+        <form onSubmit={handleSaveAndNext} className="flex flex-col h-full">
             {/* Tab Navigation - Scrollable on mobile */}
             <div className="px-4 sm:px-6 pt-3 sm:pt-4 flex-shrink-0">
                 <div className="flex gap-1 border-b border-default overflow-x-auto scrollbar-hide">
                     {tabs.map((tab) => (
                         <button
+                            type="button"
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`
@@ -137,26 +142,43 @@ export const FormPanel = () => {
                 {activeTab === 'treatment-records' && currentPage === 4 && <TreatmentRecordsForm />}
             </div>
 
-            {/* Save Button - Fixed at bottom */}
+            {/* Navigation Buttons - Fixed at bottom */}
             <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-default flex-shrink-0">
-                <button
-                    onClick={handleSaveAndNext}
-                    className="w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-primary text-white text-sm sm:text-base font-medium rounded-lg hover:bg-primary-hover transition-colors flex items-center justify-center gap-2"
-                >
-                    {currentPage >= 4 ? (
-                        <>
-                            <span>Save & Finish</span>
-                            <span>✓</span>
-                        </>
-                    ) : (
-                        <>
-                            <div className='flex space-x-2 items-center'>
-                                <Save className="h-5 w-5" />
-                                <h1>Save & Next Page →</h1>
-                            </div>
-                        </>
-                    )}
-                </button>
+                <div className="flex gap-3">
+                    {/* Previous Button */}
+                    <button
+                        type="button"
+                        onClick={previousPage}
+                        disabled={currentPage === 1}
+                        className={`px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium rounded-lg transition-colors flex items-center justify-center gap-2 ${currentPage === 1
+                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            }`}
+                    >
+                        <ChevronLeft className="h-5 w-5" />
+                        <span className="hidden sm:inline">Previous</span>
+                    </button>
+
+                    {/* Save & Next Button */}
+                    <button
+                        type="submit"
+                        className="flex-1 px-4 sm:px-6 py-2.5 sm:py-3 bg-primary text-white text-sm sm:text-base font-medium rounded-lg hover:bg-primary-hover transition-colors flex items-center justify-center gap-2"
+                    >
+                        {currentPage >= 4 ? (
+                            <>
+                                <span>Save & Finish</span>
+                                <span>✓</span>
+                            </>
+                        ) : (
+                            <>
+                                <div className='flex space-x-2 items-center'>
+                                    <Save className="h-5 w-5" />
+                                    <h1>Save & Next Page →</h1>
+                                </div>
+                            </>
+                        )}
+                    </button>
+                </div>
             </div>
 
             {/* Upload Modal */}
@@ -166,6 +188,6 @@ export const FormPanel = () => {
                 onUpload={handleModalUpload}
                 onCancel={handleModalCancel}
             />
-        </div>
+        </form>
     );
 };

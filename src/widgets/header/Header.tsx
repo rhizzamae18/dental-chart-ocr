@@ -3,15 +3,19 @@ import dentalChartLogo from "@/assets/images/dentalchartlogo.png";
 
 export const Header = () => {
     const appState = useAppStore((state) => state.appState);
-    const currentPage = useAppStore((state) => state.currentPage);
+    const resetPage = useAppStore((state) => state.resetPage);
+
 
     return <>
         {appState !== 'loading' && (
             <header className="flex items-center justify-between p-3 sm:p-5 sticky top-0 z-50 bg-white border-b">
-                {/* Left side: Logo */}
+                {/* Left side: Logo and Back Button */}
                 <div className="flex items-center space-x-2 sm:space-x-3">
+
+
                     <img
                         src={dentalChartLogo}
+                        onClick={resetPage}
                         alt="Dental Chart Logo"
                         className="h-24 w-24 sm:h-16 sm:w-16 object-contain"
                     />

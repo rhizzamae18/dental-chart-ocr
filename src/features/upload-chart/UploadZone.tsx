@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useAppStore } from '@/shared/store/useAppStore';
 import { Upload, FileText, Images } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
@@ -23,6 +23,20 @@ export const UploadZone = () => {
 
   const [isDragging, setIsDragging] = useState(false);
   const [localUploadMode, setLocalUploadMode] = useState<UploadMode>('pdf');
+  const uploadZoneRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to upload zone when mode is selected
+  const handleModeChange = (mode: UploadMode) => {
+    setLocalUploadMode(mode);
+
+    // Smooth scroll to upload zone after a short delay
+    setTimeout(() => {
+      uploadZoneRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }, 100);
+  };
 
   const handleFile = (file: File) => {
     if (!file) return;
@@ -57,7 +71,12 @@ export const UploadZone = () => {
       reader.onload = (e) => {
         const imageUrl = e.target?.result as string;
         setSeparatedPages([imageUrl]);
-        setAppState('verification');
+        setAppState('loading'); // Show processing screen
+
+        // Transition to verification after a delay
+        setTimeout(() => {
+          setAppState('verification');
+        }, 3500); // Same duration as PDF processing
       };
       reader.readAsDataURL(file);
     }
@@ -145,7 +164,7 @@ export const UploadZone = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* PDF Mode */}
           <button
-            onClick={() => setLocalUploadMode('pdf')}
+            onClick={() => handleModeChange('pdf')}
             className={`p-4 rounded-lg border-2 transition-all duration-200 ${localUploadMode === 'pdf'
               ? 'border-primary bg-primary-light shadow-md'
               : 'border-gray-200 hover:border-primary hover:bg-gray-50'
@@ -165,7 +184,7 @@ export const UploadZone = () => {
 
           {/* Images Mode */}
           <button
-            onClick={() => setLocalUploadMode('images')}
+            onClick={() => handleModeChange('images')}
             className={`p-4 rounded-lg border-2 transition-all duration-200 ${localUploadMode === 'images'
               ? 'border-primary bg-primary-light shadow-md'
               : 'border-gray-200 hover:border-primary hover:bg-gray-50'
@@ -207,6 +226,7 @@ export const UploadZone = () => {
 
       {/* Upload Zone */}
       <div
+        ref={uploadZoneRef}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}

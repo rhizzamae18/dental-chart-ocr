@@ -24,8 +24,8 @@ export const TreatmentRecordsForm = () => {
                     label="Gender"
                     fieldKey="treatmentGender"
                     options={[
-                        { label: "Yes", value: "yes" },
-                        { label: "No", value: "no" },
+                        { label: "Male", value: "M" },
+                        { label: "Female", value: "F" },
                     ]}
                 />
             </div>

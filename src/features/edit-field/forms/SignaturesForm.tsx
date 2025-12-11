@@ -1,4 +1,5 @@
 import { FormField } from '../FormField';
+import { SignatureUpload } from '../SignatureUpload';
 
 export const SignaturesForm = () => {
   return (
@@ -9,33 +10,33 @@ export const SignaturesForm = () => {
 
       <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 mb-6">
         <p className="text-sm text-blue-800">
-          <strong>Note:</strong> I understand that dentistry is not an exact science and that no guarantees can be made. 
+          <strong>Note:</strong> I understand that dentistry is not an exact science and that no guarantees can be made.
           I authorize the dentist to proceed with treatment and perform dental restorations & treatments as explained.
         </p>
       </div>
 
-      <FormField 
-        label="Patient / Parent / Guardian Signature" 
-        fieldKey="patientSignature" 
+      <FormField
+        label="Patient / Parent / Guardian Signature"
+        fieldKey="patientSignature"
         placeholder="Signature or name"
       />
 
-      <FormField 
-        label="Dentist Signature" 
-        fieldKey="dentistSignature" 
-        placeholder="Dentist signature or name"
+      {/* Dentist E-Signature Upload */}
+      <SignatureUpload
+        label="Dentist E-Signature"
+        fieldKey="dentistSignature"
       />
 
-      <FormField 
-        label="Date Signed" 
-        fieldKey="signatureDate" 
+      <FormField
+        label="Date Signed"
+        fieldKey="signatureDate"
         type="date"
       />
 
       <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        <FormField 
-          label="Additional Notes" 
-          fieldKey="consentNotes" 
+        <FormField
+          label="Additional Notes"
+          fieldKey="consentNotes"
           type="textarea"
           placeholder="Any additional consent notes or disclaimers..."
         />
